@@ -1,0 +1,34 @@
+- file: examples/declaration_of_intent.png
+  question: |
+    From the document image please extract the following:
+    - Full name of candidate (enclosed in <name-of-candidate>...</name-of-candidate>)
+    - Email address of campaign committee chairperson (enclose in <chairperson-email>...</chairperson-email>)
+    - Full name of treasurer (enclose in <treasurer-name>...</treasurer-name>)
+  expected_values:
+    - name-of-candidate: "Brian Will"
+    - chairperson-email: "brian@wrig1.com"
+    - treasurer-name: "Nina Bishop"
+- file: examples/nestle_financial_statements_2024_p6.png
+  question: |
+    From the document image please extract the following:
+    - Profit for the year 2024
+      - Express in CHF.
+      - Return only an integer (no commas, spaces etc.)
+      - Enclose in <profit-2024>...</profit-2024>
+    - Profit for the year 2023 (same formatting requirements as profit 2024 above)
+  expected_values:
+    - profit-2024: 11174000000
+    - profit-2023: 11509000000
+- file: examples/health_intake_form.png
+  question: |
+    From the document image please extract the following:
+    - Patient date of birth
+      - in format YYYY-mm-dd
+      - enclose in <patient-dob>...</patient-dob>
+    - Patient email address
+      - enclose in <email>...</email>
+    - Patient job title
+      - enclose in <job>...</job>
+  expected_values:
+    - patient-dob: 1986-09-04
+    - email: sally.walker@email.com
