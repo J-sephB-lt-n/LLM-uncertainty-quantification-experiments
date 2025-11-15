@@ -2,6 +2,7 @@
 
 import asyncio
 import base64
+import json
 import os
 from pathlib import Path
 
@@ -46,40 +47,48 @@ async def answer_question(img_path: Path, question: str) -> ChatCompletion:
                 ],
             },
         ],
+        logprobs=True,
+        top_logprobs=0,
     )
 
 
-async def answer_questions(questions: list[dict]) -> dict[str, ChatCompletion]:
+async def answer_questions(questions: dict) -> dict[str, ChatCompletion]:
     async with asyncio.TaskGroup() as tg:
         tasks = []
-        for question in questions:
+        for filename, question in questions.items():
             tasks.append(
                 tg.create_task(
                     answer_question(
-                        img_path=Path(question["file"]),
+                        img_path=Path(filename),
                         question=question["question"],
                     )
                 )
             )
 
     return {
-        question["file"]: task.result()
-        for question, task in zip(questions, tasks, strict=True)
+        filename: task.result() for filename, task in zip(questions, tasks, strict=True)
     }
 
 
 def main():
     with open("./examples/questions.yaml", "r", encoding="utf-8") as file:
-        questions: list = yaml.safe_load(file)
+        questions: dict = yaml.safe_load(file)
 
     responses: dict[str, ChatCompletion] = asyncio.run(
         answer_questions(questions),
     )
 
-    for file, response in responses.items():
-        print("--", file, "--")
-        print(response.choices[0].message.content)
-        print("=" * 50)
+    with open("output/llm_responses.json", "w", encoding="utf-8") as file:
+        json.dump(
+            {
+                filename: {
+                    "question": questions[filename],
+                    "llm_response": llm_response.model_dump(),
+                }
+                for filename, llm_response in responses.items()
+            },
+            file,
+        )
 
 
 if __name__ == "__main__":

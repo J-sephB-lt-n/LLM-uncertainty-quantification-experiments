@@ -1,4 +1,4 @@
-- file: examples/declaration_of_intent.png
+examples/declaration_of_intent.png:
   question: |
     From the document image please extract the following:
     - Full name of candidate (enclosed in <name-of-candidate>...</name-of-candidate>)
@@ -8,7 +8,8 @@
     - name-of-candidate: "Brian Will"
     - chairperson-email: "brian@wrig1.com"
     - treasurer-name: "Nina Bishop"
-- file: examples/nestle_financial_statements_2024_p6.png
+
+examples/nestle_financial_statements_2024_p6.png:
   question: |
     From the document image please extract the following:
     - Profit for the year 2024
@@ -19,7 +20,8 @@
   expected_values:
     - profit-2024: 11174000000
     - profit-2023: 11509000000
-- file: examples/health_intake_form.png
+
+examples/health_intake_form.png:
   question: |
     From the document image please extract the following:
     - Patient date of birth
@@ -30,5 +32,5 @@
     - Patient job title
       - enclose in <job>...</job>
   expected_values:
-    - patient-dob: 1986-09-04
+    - patient-dob: "1986-09-04"
     - email: sally.walker@email.com
