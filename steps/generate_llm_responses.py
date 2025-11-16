@@ -26,7 +26,7 @@ async def answer_question(img_path: Path, question: str) -> ChatCompletion:
         img: bytes = file.read()
 
     img_b64: str = base64.b64encode(img).decode("ascii")
-    img_extension: str = img_path.stem
+    img_extension: str = img_path.suffix[1:]
 
     return await llm.chat.completions.create(
         model=MODEL,
