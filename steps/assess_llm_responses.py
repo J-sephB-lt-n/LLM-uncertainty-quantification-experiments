@@ -56,9 +56,17 @@ def main():
                 "llm_value": llm_value,
                 "llm_is_correct": llm_is_correct,
                 # "tokens": [t.__dict__ for t in tokens],
-                "min_logprob": min(t.log_prob for t in tokens),
-                "mean_logprob": stats.mean(t.log_prob for t in tokens),
-                "var_logprob": stats.pvariance(t.log_prob for t in tokens),
+                "min_logprob": (
+                    min(t.log_prob for t in tokens) if find_llm_value else None
+                ),
+                "mean_logprob": (
+                    stats.mean(t.log_prob for t in tokens) if find_llm_value else None
+                ),
+                "var_logprob": (
+                    stats.pvariance(t.log_prob for t in tokens)
+                    if find_llm_value
+                    else None
+                ),
             }
             assessment["extracted"].append(record)
 

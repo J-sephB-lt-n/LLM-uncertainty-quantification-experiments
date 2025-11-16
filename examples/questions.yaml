@@ -59,6 +59,23 @@ examples/domestic_expenditure.png:
     - largest-spend-category: "Expenditure on education and miscelllanious Expenditure"
     - rent: "12%"
 
+examples/greenhouse_temperature.png:
+  question: |
+    From the image shown, please extract the following:
+    - Maximum temperature
+      - integer (no units)
+      - enclose in <max-temp>...</max-temp>
+    - Temperature at 1pm
+      - float, to 1 decimal place (no units)
+      - enclose in <1pm-temp>...</1pm-temp>
+    - Time at which maximum temperature was observed
+      - in format XXhXX e.g. 13h49
+      - enclose in <max-temp-time>...</max-temp-time>
+  expected_values:
+    - max-temp: 25
+    - 1pm-temp: 24.5
+    - max-temp-time: "12h00"
+
 examples/health_intake_form.png:
   question: |
     From the document image, please extract the following:
