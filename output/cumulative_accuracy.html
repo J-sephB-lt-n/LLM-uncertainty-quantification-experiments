@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@6.1.0"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"values": [{"data_included_fraction": 0.14285714285714285, "cumulative_accuracy": 0.0, "min_logprob": -1.1517960956552997e-05, "n_cumulative": 1, "n_correct": 0}, {"data_included_fraction": 0.2857142857142857, "cumulative_accuracy": 0.0, "min_logprob": -0.00010008628305513412, "n_cumulative": 2, "n_correct": 0}, {"data_included_fraction": 0.42857142857142855, "cumulative_accuracy": 0.0, "min_logprob": -0.00016861737822182477, "n_cumulative": 3, "n_correct": 0}, {"data_included_fraction": 0.5714285714285714, "cumulative_accuracy": 0.25, "min_logprob": -0.0024865958839654922, "n_cumulative": 4, "n_correct": 1}, {"data_included_fraction": 0.7142857142857143, "cumulative_accuracy": 0.4, "min_logprob": -0.0067161982879042625, "n_cumulative": 5, "n_correct": 2}, {"data_included_fraction": 0.8571428571428571, "cumulative_accuracy": 0.5, "min_logprob": -0.0838349461555481, "n_cumulative": 6, "n_correct": 3}, {"data_included_fraction": 1.0, "cumulative_accuracy": 0.5714285714285714, "min_logprob": -0.6492738127708435, "n_cumulative": 7, "n_correct": 4}]}, "mark": {"type": "line", "point": true}, "encoding": {"tooltip": [{"field": "data_included_fraction", "format": ".2%", "title": "Fraction of Data", "type": "quantitative"}, {"field": "cumulative_accuracy", "format": ".2%", "title": "Cumulative Accuracy", "type": "quantitative"}, {"field": "min_logprob", "title": "Min Logprob Threshold", "type": "quantitative"}, {"field": "n_cumulative", "title": "Examples Included", "type": "quantitative"}, {"field": "n_correct", "title": "Correct Examples", "type": "quantitative"}], "x": {"axis": {"format": "%"}, "field": "data_included_fraction", "title": "Fraction of Data Included (ordered by confidence)", "type": "quantitative"}, "y": {"axis": {"format": "%"}, "field": "cumulative_accuracy", "scale": {"domain": [0, 1]}, "title": "Cumulative Accuracy", "type": "quantitative"}}, "height": 400, "params": [{"name": "param_1e9efca18e7a2868", "select": {"type": "interval", "encodings": ["x", "y"]}, "bind": "scales"}], "title": "Cumulative Accuracy vs. Confidence Threshold", "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json"};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

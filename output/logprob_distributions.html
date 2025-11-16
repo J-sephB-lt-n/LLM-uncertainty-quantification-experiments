@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@6.1.0"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"values": [{"filename": "examples/nestle_financial_statements_2024_p6.png", "key": "profit-2023", "expected": 11509000000, "llm_is_correct": false, "min_logprob": -1.1517960956552997e-05}, {"filename": "examples/health_intake_form.png", "key": "email", "expected": "sally.walker@email.com", "llm_is_correct": false, "min_logprob": -0.00010008628305513412}, {"filename": "examples/nestle_financial_statements_2024_p6.png", "key": "profit-2024", "expected": 11174000000, "llm_is_correct": false, "min_logprob": -0.00016861737822182477}, {"filename": "examples/declaration_of_intent.png", "key": "chairperson-email", "expected": "brian@wrig1.com", "llm_is_correct": true, "min_logprob": -0.0024865958839654922}, {"filename": "examples/declaration_of_intent.png", "key": "treasurer-name", "expected": "Nina Bishop", "llm_is_correct": true, "min_logprob": -0.0067161982879042625}, {"filename": "examples/health_intake_form.png", "key": "patient-dob", "expected": "1986-09-04", "llm_is_correct": true, "min_logprob": -0.0838349461555481}, {"filename": "examples/declaration_of_intent.png", "key": "name-of-candidate", "expected": "Brian Will", "llm_is_correct": true, "min_logprob": -0.6492738127708435}]}, "mark": {"type": "bar", "binSpacing": 0, "opacity": 0.7}, "encoding": {"color": {"field": "llm_is_correct", "title": "LLM is Correct", "type": "nominal"}, "tooltip": [{"field": "llm_is_correct", "title": "LLM is correct", "type": "nominal"}, {"aggregate": "count", "title": "Number of examples", "type": "quantitative"}], "x": {"bin": {"maxbins": 100}, "field": "min_logprob", "title": "min(logprob)", "type": "quantitative"}, "y": {"aggregate": "count", "stack": null, "title": "Count", "type": "quantitative"}}, "height": 400, "params": [{"name": "param_1e9efca18e7a2868", "select": {"type": "interval", "encodings": ["x", "y"]}, "bind": "scales"}], "title": "Distribution of min(logprob)", "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json"};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

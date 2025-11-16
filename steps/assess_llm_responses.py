@@ -53,11 +53,15 @@ def main():
                 "llm_capture": llm_capture,
                 "llm_value": llm_value,
                 "llm_is_correct": llm_is_correct,
-                "tokens": tokens,
+                "tokens": [t.__dict__ for t in tokens],
+                "min_logprob": min(t.log_prob for t in tokens),
             }
             assessment["extracted"].append(record)
 
         assessments[filename] = assessment
+
+    with open("output/llm_assessment.json", "w", encoding="utf-8") as file:
+        json.dump(assessments, file)
 
 
 @dataclass
