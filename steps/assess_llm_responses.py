@@ -50,11 +50,12 @@ def main():
 
             record: dict = {
                 "key": key,
+                "llm_response": llm_response_text,
                 "expected": expected_value,
                 "llm_capture": llm_capture,
                 "llm_value": llm_value,
                 "llm_is_correct": llm_is_correct,
-                "tokens": [t.__dict__ for t in tokens],
+                # "tokens": [t.__dict__ for t in tokens],
                 "min_logprob": min(t.log_prob for t in tokens),
                 "mean_logprob": stats.mean(t.log_prob for t in tokens),
                 "var_logprob": stats.pvariance(t.log_prob for t in tokens),

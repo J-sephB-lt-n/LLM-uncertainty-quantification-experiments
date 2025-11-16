@@ -1,29 +1,67 @@
+examples/account_opening_form.png:
+  question: |
+    From the document image, please extract the following:
+    - Account number (enclose in <acct-number>...</acct-number>)
+    - Person name
+      - Don't include title (only first name, middle name and last name)
+      - Title case
+      - Enclose in <person-name>...</person-name>
+    - Account type 
+      - Exact wording as shown in image
+      - Enclose in <acct-type>...</acct-type>
+    - PAN ID (enclose in <pan-id>...</pan-id>)
+  expected_values:
+    - acct-number: "115207765307001"
+    - person-name: "Shane Sanchez"
+    - pan-id: "BBMPK0627D"
+
+examples/annual_return.png:
+  question: |
+    From the document image, please extract the following:
+    - Name of plan (enclose in <plan-name>...</plan-name>)
+    - Plan effective date
+      - YYYY-mm-dd
+      - enclose in <effective-date>...</effective-date>
+  expected_values:
+    - plan-name: Annual Return Plan
+    - effective-date: "2022-02-05"
+
 examples/declaration_of_intent.png:
   question: |
-    From the document image please extract the following:
+    From the document image, please extract the following:
     - Full name of candidate (enclosed in <name-of-candidate>...</name-of-candidate>)
     - Email address of campaign committee chairperson (enclose in <chairperson-email>...</chairperson-email>)
     - Full name of treasurer (enclose in <treasurer-name>...</treasurer-name>)
+    - Date document received
+      - YYYY-mm-dd
+      - enclose in <date-received>...</date-received>
   expected_values:
     - name-of-candidate: "Brian Will"
     - chairperson-email: "brian@wrig1.com"
     - treasurer-name: "Nina Bishop"
+    - date-received: "2021-05-21"
 
-examples/nestle_financial_statements_2024_p6.png:
+examples/domestic_expenditure.png:
   question: |
-    From the document image please extract the following:
-    - Profit for the year 2024
-      - Express in CHF.
-      - Return only an integer (no commas, spaces etc.)
-      - Enclose in <profit-2024>...</profit-2024>
-    - Profit for the year 2023 (same formatting requirements as profit 2024 above)
+    From the image shown, please extract the following:
+    - Spending % on medical
+      - In format "xx%" e.g. "03%", "98%"
+      - enclose in <medical-percent>...</medical-percent>
+    - Largest expenditure category
+      - return category label exactly as in the image
+      - write category on a single line (no newlines) with single spaces between words
+      - enclose in <largest-spend-category>...</largest-spend-category>
+    - Proportion of spend to property rental
+      - In format "xx%" e.g. "03%", "98%"
+      - enclose in <rent>...</rent>
   expected_values:
-    - profit-2024: 11174000000
-    - profit-2023: 11509000000
+    - medical-percent: "23%"
+    - largest-spend-category: "Expenditure on education and miscelllanious Expenditure"
+    - rent: "12%"
 
 examples/health_intake_form.png:
   question: |
-    From the document image please extract the following:
+    From the document image, please extract the following:
     - Patient date of birth
       - in format YYYY-mm-dd
       - enclose in <patient-dob>...</patient-dob>
@@ -34,3 +72,15 @@ examples/health_intake_form.png:
   expected_values:
     - patient-dob: "1986-09-04"
     - email: sally.walker@email.com
+
+examples/nestle_financial_statements_2024_p6.png:
+  question: |
+    From the document image, please extract the following:
+    - Profit for the year 2024
+      - Express in CHF (not ,000 or mill)
+      - Return only an integer (no commas, spaces etc.)
+      - Enclose in <profit-2024>...</profit-2024>
+    - Profit for the year 2023 (same formatting requirements as profit 2024 above)
+  expected_values:
+    - profit-2024: 11174000000
+    - profit-2023: 11509000000

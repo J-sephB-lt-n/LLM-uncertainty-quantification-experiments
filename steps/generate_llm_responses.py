@@ -21,6 +21,7 @@ llm = openai.AsyncOpenAI(
 
 async def answer_question(img_path: Path, question: str) -> ChatCompletion:
     """TODO."""
+    print("Starting", img_path)
     with open(img_path, "rb") as file:
         img: bytes = file.read()
 
@@ -71,6 +72,11 @@ async def answer_questions(questions: dict) -> dict[str, ChatCompletion]:
 
 
 def main():
+    print("clearing outputs of previous run")
+    for item in Path("./output").iterdir():
+        if item.is_file():
+            item.unlink()
+
     with open("./examples/questions.yaml", "r", encoding="utf-8") as file:
         questions: dict = yaml.safe_load(file)
 
