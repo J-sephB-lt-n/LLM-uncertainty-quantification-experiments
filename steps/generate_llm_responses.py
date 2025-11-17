@@ -10,6 +10,7 @@ import openai
 from openai.types.chat import ChatCompletion
 import yaml
 
+# MODEL = "vertex_ai.gemini-2.5-pro"
 MODEL = "azure.gpt-4.1-2025-04-14"
 TEMPERATURE = 0
 
