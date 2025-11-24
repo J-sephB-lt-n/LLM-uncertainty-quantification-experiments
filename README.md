@@ -14,3 +14,10 @@ Assess the LLM responses (i.e. check answers for correctness against the known t
 uv run python -m steps.assess_llm_responses
 cat output/llm_assessment.json | jq .
 ```
+
+Export some plots visualising the correlation between LLM token logprobs and answer correctness:
+
+```bash
+uv run python -m steps.evaluate_uncertainty
+ls -1 output/*.html
+```

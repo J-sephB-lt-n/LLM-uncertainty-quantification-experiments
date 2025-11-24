@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@6.1.0"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"values": [{"data_included_fraction": 0.047619047619047616, "cumulative_accuracy": 1.0, "n_cumulative": 1, "n_correct": 1, "mean_logprob": -3.846688139736381e-07}, {"data_included_fraction": 0.09523809523809523, "cumulative_accuracy": 1.0, "n_cumulative": 2, "n_correct": 2, "mean_logprob": -4.637650903305257e-07}, {"data_included_fraction": 0.14285714285714285, "cumulative_accuracy": 1.0, "n_cumulative": 3, "n_correct": 3, "mean_logprob": -9.945667033643228e-07}, {"data_included_fraction": 0.19047619047619047, "cumulative_accuracy": 0.75, "n_cumulative": 4, "n_correct": 3, "mean_logprob": -5.133834184272763e-06}, {"data_included_fraction": 0.23809523809523808, "cumulative_accuracy": 0.8, "n_cumulative": 5, "n_correct": 4, "mean_logprob": -2.9104857322944815e-05}, {"data_included_fraction": 0.2857142857142857, "cumulative_accuracy": 0.8333333333333334, "n_cumulative": 6, "n_correct": 5, "mean_logprob": -3.456454578554258e-05}, {"data_included_fraction": 0.3333333333333333, "cumulative_accuracy": 0.8571428571428571, "n_cumulative": 7, "n_correct": 6, "mean_logprob": -9.001734165044931e-05}, {"data_included_fraction": 0.38095238095238093, "cumulative_accuracy": 0.875, "n_cumulative": 8, "n_correct": 7, "mean_logprob": -0.00010673411011907774}, {"data_included_fraction": 0.42857142857142855, "cumulative_accuracy": 0.8888888888888888, "n_cumulative": 9, "n_correct": 8, "mean_logprob": -0.0004671184989488708}, {"data_included_fraction": 0.47619047619047616, "cumulative_accuracy": 0.9, "n_cumulative": 10, "n_correct": 9, "mean_logprob": -0.0006982306749341305}, {"data_included_fraction": 0.5238095238095238, "cumulative_accuracy": 0.9090909090909091, "n_cumulative": 11, "n_correct": 10, "mean_logprob": -0.0010436329693119559}, {"data_included_fraction": 0.5714285714285714, "cumulative_accuracy": 0.9166666666666666, "n_cumulative": 12, "n_correct": 11, "mean_logprob": -0.0015219196502584964}, {"data_included_fraction": 0.6190476190476191, "cumulative_accuracy": 0.9230769230769231, "n_cumulative": 13, "n_correct": 12, "mean_logprob": -0.0018039195694857174}, {"data_included_fraction": 0.6666666666666666, "cumulative_accuracy": 0.8571428571428571, "n_cumulative": 14, "n_correct": 12, "mean_logprob": -0.003614630515692596}, {"data_included_fraction": 0.7142857142857143, "cumulative_accuracy": 0.8, "n_cumulative": 15, "n_correct": 12, "mean_logprob": -0.003784470206533377}, {"data_included_fraction": 0.7619047619047619, "cumulative_accuracy": 0.75, "n_cumulative": 16, "n_correct": 12, "mean_logprob": -0.005097281546331901}, {"data_included_fraction": 0.8095238095238095, "cumulative_accuracy": 0.7647058823529411, "n_cumulative": 17, "n_correct": 13, "mean_logprob": -0.008736115484763022}, {"data_included_fraction": 0.8571428571428571, "cumulative_accuracy": 0.7222222222222222, "n_cumulative": 18, "n_correct": 13, "mean_logprob": -0.022545218467712402}, {"data_included_fraction": 0.9047619047619048, "cumulative_accuracy": 0.7368421052631579, "n_cumulative": 19, "n_correct": 14, "mean_logprob": -0.03866402694612552}, {"data_included_fraction": 0.9523809523809523, "cumulative_accuracy": 0.7, "n_cumulative": 20, "n_correct": 14, "mean_logprob": -0.04763537921104728}, {"data_included_fraction": 1.0, "cumulative_accuracy": 0.6666666666666666, "n_cumulative": 21, "n_correct": 14, "mean_logprob": -0.061337663999801444}]}, "mark": {"type": "line", "point": true}, "encoding": {"tooltip": [{"field": "data_included_fraction", "format": ".2%", "title": "Fraction of Data", "type": "quantitative"}, {"field": "cumulative_accuracy", "format": ".2%", "title": "Cumulative Accuracy", "type": "quantitative"}, {"field": "mean_logprob", "title": "mean(logprob) Threshold", "type": "quantitative"}, {"field": "n_cumulative", "title": "Examples Included", "type": "quantitative"}, {"field": "n_correct", "title": "Correct Examples", "type": "quantitative"}], "x": {"axis": {"format": "%"}, "field": "data_included_fraction", "title": "Fraction of Data Included (ordered by confidence)", "type": "quantitative"}, "y": {"axis": {"format": "%"}, "field": "cumulative_accuracy", "scale": {"domain": [0, 1]}, "title": "Cumulative Accuracy", "type": "quantitative"}}, "height": 400, "params": [{"name": "param_1e9efca18e7a2868", "select": {"type": "interval", "encodings": ["x", "y"]}, "bind": "scales"}], "title": "Cumulative Accuracy vs. Confidence Threshold (mean(logprob))", "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json"};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
