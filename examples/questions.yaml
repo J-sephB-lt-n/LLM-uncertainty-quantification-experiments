@@ -72,8 +72,8 @@ examples/greenhouse_temperature.png:
       - in format XXhXX e.g. 13h49
       - enclose in <max-temp-time>...</max-temp-time>
   expected_values:
-    - max-temp: 25
-    - 1pm-temp: 24.5
+    - max-temp: "25"
+    - 1pm-temp: "24.5"
     - max-temp-time: "12h00"
 
 examples/health_intake_form.png:
@@ -99,5 +99,17 @@ examples/nestle_financial_statements_2024_p6.png:
       - Enclose in <profit-2024>...</profit-2024>
     - Profit for the year 2023 (same formatting requirements as profit 2024 above)
   expected_values:
-    - profit-2024: 11174000000
-    - profit-2023: 11509000000
+    - profit-2024: "11174000000"
+    - profit-2023: "11509000000"
+
+examples/read_handwriting_on_pdf_file.png:
+  question: |
+    From the document image shown, please extract the following:
+    - Service number of C.B.T. De Silva
+      - integer (no delimiters)
+      - Enclose in <cbt-de-silva-service-no>...</cbt-de-silva-service-no>
+    - Name of individual who crossed off their name from the list
+      - Enclose in <crossed-off-name>...</crossed-off-name>
+  expected_values:
+    - cbt-de-silva-service-no: "011430"
+    - crossed-off-name: Janaka de Silva

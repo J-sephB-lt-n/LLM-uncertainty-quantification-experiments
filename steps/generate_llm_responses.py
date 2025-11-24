@@ -1,5 +1,6 @@
-"""TODO."""
+"""Generate LLM answers to the proposed questions (tasks)."""
 
+import argparse
 import asyncio
 import base64
 import json
@@ -10,17 +11,13 @@ import openai
 from openai.types.chat import ChatCompletion
 import yaml
 
-# MODEL = "vertex_ai.gemini-2.5-pro"
-MODEL = "azure.gpt-4.1-2025-04-14"
-TEMPERATURE = 0
 
-llm = openai.AsyncOpenAI(
-    base_url=os.environ["OPENAI_BASE_URL"],
-    api_key=os.environ["OPENAI_API_KEY"],
-)
-
-
-async def answer_question(img_path: Path, question: str) -> ChatCompletion:
+async def answer_question(
+    img_path: Path,
+    question: str,
+    llm: openai.AsyncOpenAI,
+    model_name: str,
+) -> ChatCompletion:
     """TODO."""
     print("Starting", img_path)
     with open(img_path, "rb") as file:
@@ -30,8 +27,8 @@ async def answer_question(img_path: Path, question: str) -> ChatCompletion:
     img_extension: str = img_path.suffix[1:]
 
     return await llm.chat.completions.create(
-        model=MODEL,
-        temperature=TEMPERATURE,
+        model=model_name,
+        temperature=0,
         messages=[
             {
                 "role": "user",
@@ -54,7 +51,11 @@ async def answer_question(img_path: Path, question: str) -> ChatCompletion:
     )
 
 
-async def answer_questions(questions: dict) -> dict[str, ChatCompletion]:
+async def answer_questions(
+    questions: dict,
+    llm: openai.AsyncOpenAI,
+    model_name: str,
+) -> dict[str, ChatCompletion]:
     async with asyncio.TaskGroup() as tg:
         tasks = []
         for filename, question in questions.items():
@@ -63,6 +64,8 @@ async def answer_questions(questions: dict) -> dict[str, ChatCompletion]:
                     answer_question(
                         img_path=Path(filename),
                         question=question["question"],
+                        llm=llm,
+                        model_name=model_name,
                     )
                 )
             )
@@ -73,6 +76,14 @@ async def answer_questions(questions: dict) -> dict[str, ChatCompletion]:
 
 
 def main():
+    arg_parser = argparse.ArgumentParser()
+    arg_parser.add_argument(
+        "-m",
+        "--model_name",
+        required=True,
+    )
+    cli_args = arg_parser.parse_args()
+
     print("clearing outputs of previous run")
     for item in Path("./output").iterdir():
         if item.is_file():
@@ -81,8 +92,17 @@ def main():
     with open("./examples/questions.yaml", "r", encoding="utf-8") as file:
         questions: dict = yaml.safe_load(file)
 
+    llm = openai.AsyncOpenAI(
+        base_url=os.environ["OPENAI_BASE_URL"],
+        api_key=os.environ["OPENAI_API_KEY"],
+    )
+
     responses: dict[str, ChatCompletion] = asyncio.run(
-        answer_questions(questions),
+        answer_questions(
+            questions,
+            llm=llm,
+            model_name=cli_args.model_name,
+        ),
     )
 
     with open("output/llm_responses.json", "w", encoding="utf-8") as file:

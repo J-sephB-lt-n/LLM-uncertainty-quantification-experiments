@@ -1,4 +1,4 @@
-"""TODO."""
+"""Assess the LLM responses for correctness against the known true answers."""
 
 import json
 import re
